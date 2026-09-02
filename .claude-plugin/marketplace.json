@@ -1,0 +1,19 @@
+{
+  "name": "peliqan-plugins",
+  "description": "Internal Claude Code plugin for Peliqan",
+  "owner": {
+    "name": "Peliqan"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "peliqan",
+      "source": "./plugins/peliqan",
+      "description": "Internal Peliqan skills and agents",
+      "category": "productivity",
+      "tags": ["peliqan", "timesheet", "time-tracking", "sync", "reverse-etl"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "peliqan",
+  "description": "Internal Peliqan skills and agents — one plugin, one install, everything grows here",
+  "author": {
+    "name": "Peliqan"
+  },
+  "keywords": ["peliqan", "timesheet", "time-tracking", "sync", "reverse-etl"]
+}
