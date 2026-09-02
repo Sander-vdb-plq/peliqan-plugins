@@ -1,5 +1,6 @@
 {
   "name": "peliqan",
+  "version": "1.0.0",
   "description": "Internal Peliqan skills and agents — one plugin, one install, everything grows here",
   "author": {
     "name": "Peliqan"
