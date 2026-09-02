@@ -13,7 +13,14 @@
       "source": "./plugins/peliqan",
       "description": "Internal Peliqan skills and agents",
       "category": "productivity",
-      "tags": ["peliqan", "timesheet", "time-tracking", "sync", "reverse-etl"]
+      "tags": [
+        "peliqan",
+        "sync",
+        "reverse-etl",
+        "dashboards",
+        "medallion",
+        "power-bi"
+      ]
     }
   ]
 }

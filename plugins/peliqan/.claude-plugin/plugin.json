@@ -1,8 +1,15 @@
 {
   "name": "peliqan",
-  "description": "Internal Peliqan skills and agents — one plugin, one install, everything grows here",
+  "description": "Internal Peliqan skills and agents \u2014 one plugin, one install, everything grows here",
   "author": {
     "name": "Peliqan"
   },
-  "keywords": ["peliqan", "timesheet", "time-tracking", "sync", "reverse-etl"]
+  "keywords": [
+    "peliqan",
+    "sync",
+    "reverse-etl",
+    "dashboards",
+    "medallion",
+    "power-bi"
+  ]
 }

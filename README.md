@@ -5,17 +5,15 @@ Claude Code / Cowork plugin marketplace for Peliqan's internal plugins.
 ## Install
 
 ```
-/plugin marketplace add <owner>/peliqan-plugins
+/plugin marketplace add Sander-vdb-plq/peliqan-plugins
 /plugin install peliqan@peliqan-plugins
 ```
-
-Replace `<owner>` with whatever account this repo lives under.
 
 ## Contents
 
 | Plugin | What's in it |
 |---|---|
-| [`peliqan`](plugins/peliqan) | Skills: `timesheet-workday`, `timesheet-logger`, `peliqan-sync-support`. Agents: `peliqan-support`, `peliqan-builder`, `timesheet-backfill`, `timesheet-auditor`. |
+| [`peliqan`](plugins/peliqan) | Skills: `peliqan-sync`, `peliqan-sync-support`, `medallion-dashboard-builder`. Agents: `peliqan-builder`, `peliqan-support`. |
 
 Everything new goes into the existing `peliqan` plugin as another `skills/<name>/`
 folder or `agents/<name>.md` file, rather than as a new plugin — see that

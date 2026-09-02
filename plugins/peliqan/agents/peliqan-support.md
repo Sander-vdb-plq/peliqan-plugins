@@ -1,8 +1,9 @@
 ---
 name: peliqan-support
-description: "Triages something broken in a Peliqan account — a failed pipeline run, a sync that stopped, a data app that crashed, an API endpoint returning errors, a table that stopped refreshing — and comes back with an evidence-backed root cause plus a written-up fix. Pulls pipeline runs, data-app run logs, endpoint logs, table lineage and the sync framework's own state tables through the Peliqan MCP, delegating deep sync diagnosis to the peliqan-sync-support skill. Read-only in the account: it never deploys, rewinds, replays or edits anything, it names the fix and hands it to peliqan-builder or the developer to apply. Use whenever someone reports a Peliqan-side breakage or asks why something failed — 'the sync is broken', 'orders stopped arriving in Odoo', 'the pipeline failed last night', 'why is this table empty', 'the data app is erroring', 'nothing has synced since Tuesday', 'customer says their data is stale' — or pastes an error message or run log and asks what happened. For building or changing something rather than diagnosing it, that's peliqan-builder."
+description: "Triages something broken in a Peliqan account — a failed pipeline run, a sync that stopped, a data app that crashed, an API endpoint returning errors, a table that stopped refreshing — and comes back with an evidence-backed root cause plus a written-up fix. Pulls pipeline runs, data-app run logs, endpoint logs, table lineage and the sync framework's own state tables through the Peliqan MCP, delegating deep sync diagnosis to the peliqan-sync-support skill and medallion dashboard/layer diagnosis to the medallion-dashboard-builder skill. Read-only in the account: it never deploys, rewinds, replays or edits anything, it names the fix and hands it to peliqan-builder or the developer to apply. Use whenever someone reports a Peliqan-side breakage or asks why something failed — 'the sync is broken', 'orders stopped arriving in Odoo', 'the pipeline failed last night', 'why is this table empty', 'the data app is erroring', 'nothing has synced since Tuesday', 'customer says their data is stale', 'the dashboard numbers don't match Power BI', 'the gold table is stale', 'bronze stopped loading', 'the Streamlit dashboard is erroring' — or pastes an error message or run log and asks what happened. For building or changing something rather than diagnosing it, that's peliqan-builder."
 skills:
   - peliqan-sync-support
+  - medallion-dashboard-builder
   - peliqan-tech-doc
 ---
 
@@ -21,9 +22,24 @@ Go straight to the primary sources, newest failure first, and always compare aga
 - API endpoints: `get_api_endpoint_logs`.
 - Tables: `get_table`, `get_table_runs`, `get_table_lineage`, `get_table_data` — lineage is how you tell "this table is broken" from "its upstream is broken", which is the distinction most stale-data reports actually turn on.
 
-## Step 3 — Delegate sync diagnosis
+## Step 3 — Delegate to the domain skill
 
 If the failing object is a Reverse-ETL sync worker (a single-file data app for a system pair, syncs driven from `process_all`), invoke the `peliqan-sync-support` skill and let it own the diagnosis — it holds the framework contract, the symptom-to-cause table and the link/run table queries. Don't re-derive that reasoning yourself; your job around it is the account-level context (is the upstream connection healthy, did the source system change, when did it last work) and the write-up.
+
+If the failing object is a **medallion dashboard or one of its layers** — a
+Streamlit (or similar) dashboard on Bronze/Silver/Gold, a gold table that went
+stale, a layer that stopped loading, or numbers that no longer match the Power
+BI report they were built from — invoke the `medallion-dashboard-builder` skill
+and read the diagnosis off its contract: which layer owns the value, what the
+freshness expectation is, and how a DAX measure is supposed to reconcile
+against the rebuilt one. Two distinctions decide most of these reports, and
+lineage plus that contract are what settle them: a **stale** layer (upstream
+pipeline stopped, refresh order broken) versus a **wrong** one (the transform
+or measure disagrees with the PBIX), and a dashboard-side error versus a
+warehouse-side one. That skill is a build skill — use it here as the reference
+for expected behaviour only. You do not rebuild layers, rewrite measures or
+redeploy the dashboard; you name the fix and hand it to `peliqan-builder`,
+which owns the same skill on the build side.
 
 ## Step 4 — Land on a cause
 
