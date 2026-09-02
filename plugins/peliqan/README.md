@@ -27,7 +27,7 @@ Note that `medallion-dashboard-builder` is used from both sides: `peliqan-builde
 
 ```
 /plugin marketplace add Sander-vdb-plq/peliqan-plugins
-/plugin install peliqan@peliqan-plugins
+/plugin install peliqan@peliqan-plugins-sander
 ```
 
 ## Requirements
