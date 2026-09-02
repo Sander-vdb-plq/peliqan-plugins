@@ -6,7 +6,7 @@ Claude Code / Cowork plugin marketplace for Peliqan's internal plugins.
 
 ```
 /plugin marketplace add Sander-vdb-plq/peliqan-plugins
-/plugin install peliqan@peliqan-plugins-sander
+/plugin install peliqan@peliqan-plugins
 ```
 
 ## Contents

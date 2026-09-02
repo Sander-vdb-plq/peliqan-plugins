@@ -1,6 +1,6 @@
 {
-  "name": "peliqan-plugins-sander",
-  "description": "Peliqan internal plugin marketplace — sync and medallion skills (Customer Success)",
+  "name": "peliqan-plugins",
+  "description": "Internal Claude Code plugin marketplace for Peliqan",
   "owner": {
     "name": "Peliqan"
   },
