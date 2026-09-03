@@ -16,8 +16,8 @@ Skills are model-invoked: ask "build a Shopify to Odoo sync", "why did the Odoo 
 
 | Agent | What it does |
 |---|---|
-| `peliqan-builder` | Builds and deploys on the platform: sync workers and individual syncs (`peliqan-sync`), data apps, pipelines, schemas, query tables and API endpoints, medallion dashboards (`medallion-dashboard-builder`) and RAG setups (`create-rag`) — then runs them and verifies from the logs. Reads freely, creates and updates what the request calls for, never deletes and never runs destructive SQL unasked. |
-| `peliqan-support` | Triages a breakage in a Peliqan account — failed pipeline run, stopped sync, crashing data app, erroring endpoint, stale table, a dashboard whose numbers drifted — from the runs, logs and lineage, and returns an evidence-backed root cause plus a written-up fix. Read-only in the account: it names the fix, `peliqan-builder` or the developer applies it. Delegates deep sync diagnosis to `peliqan-sync-support`, medallion dashboard/layer diagnosis to `medallion-dashboard-builder`, and the write-up to `peliqan-tech-doc`. |
+| `peliqan-builder` | Builds and deploys on the platform: sync workers and individual syncs (`peliqan-sync`), data apps, pipelines, schemas, query tables and API endpoints, and medallion dashboards (`medallion-dashboard-builder`) — then runs them and verifies from the logs. Reads freely, creates and updates what the request calls for, never deletes and never runs destructive SQL unasked. |
+| `peliqan-support` | Triages a breakage in a Peliqan account — failed pipeline run, stopped sync, crashing data app, erroring endpoint, stale table, a dashboard whose numbers drifted — from the runs, logs and lineage, and returns an evidence-backed root cause plus a written-up fix. Read-only in the account: it names the fix, `peliqan-builder` or the developer applies it. Delegates deep sync diagnosis to `peliqan-sync-support` and medallion dashboard/layer diagnosis to `medallion-dashboard-builder`. |
 
 Delegate to `peliqan-support` when something is broken and to `peliqan-builder` when something needs building — the split is diagnose vs. change, and each hands off to the other when it hits the far side of that line.
 
@@ -47,7 +47,7 @@ Everything here works through the **Peliqan MCP** server (`list_data_apps`, `get
 
 The URL carries no account id — the server resolves the account from the user's own authorisation, which each user completes once on first use.
 
-Both agents also expect two account-level Peliqan skills that still live outside this plugin — `peliqan-tech-doc` (write-ups) and `create-rag` (RAG/semantic search) — since they drive those rather than duplicating them. The skills they drive that *are* bundled here (`peliqan-sync`, `medallion-dashboard-builder`) need no separate install.
+Every skill the agents drive is bundled here (`peliqan-sync`, `peliqan-sync-support`, `medallion-dashboard-builder`), so there is nothing else to install.
 
 ## Adding a new skill or agent
 

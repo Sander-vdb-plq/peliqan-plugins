@@ -147,8 +147,8 @@ the target. A green run with an unchanged bookmark is not a confirmed fix.
   outdated `FRAMEWORK_VERSION`, a sync still disabled, a missing
   `references/systems/<system>.md` checklist row, a `TEST_LIMIT` left in place.
 
-For an incident worth recording, hand the write-up to `peliqan-tech-doc` for a
-shareable page, or `create_project_note` to keep it with the account.
+For an incident worth recording, use `create_project_note` to keep the write-up
+with the account.
 
 ## Notes
 
