@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "peliqan": {
+      "type": "http",
+      "url": "https://mcp.eu.peliqan.io/mcp"
+    }
+  }
+}

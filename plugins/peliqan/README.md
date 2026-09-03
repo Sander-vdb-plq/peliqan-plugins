@@ -32,20 +32,20 @@ Note that `medallion-dashboard-builder` is used from both sides: `peliqan-builde
 
 ## Requirements
 
-Everything here works through the **Peliqan MCP** server (`list_data_apps`, `get_data_app_run_logs`, `get_connection_pipeline_runs`, `get_table_lineage`, `create_data_app`, …). It is not bundled with this plugin — the endpoint contains an account id, so each user connects it themselves.
-
-To bundle it anyway, add a `.mcp.json` at this plugin's root:
+Everything here works through the **Peliqan MCP** server (`list_data_apps`, `get_data_app_run_logs`, `get_connection_pipeline_runs`, `get_table_lineage`, `create_data_app`, …), and it comes bundled: [`.mcp.json`](.mcp.json) at this plugin's root points at the remote server, so installing the plugin is enough and nobody configures an endpoint by hand.
 
 ```json
 {
   "mcpServers": {
     "peliqan": {
       "type": "http",
-      "url": "https://api.eu.peliqan.io/<ACCOUNT_ID>/mcp"
+      "url": "https://mcp.eu.peliqan.io/mcp"
     }
   }
 }
 ```
+
+The URL carries no account id — the server resolves the account from the user's own authorisation, which each user completes once on first use.
 
 Both agents also expect two account-level Peliqan skills that still live outside this plugin — `peliqan-tech-doc` (write-ups) and `create-rag` (RAG/semantic search) — since they drive those rather than duplicating them. The skills they drive that *are* bundled here (`peliqan-sync`, `medallion-dashboard-builder`) need no separate install.
 
